@@ -1,4 +1,4 @@
-<!-- [![OX Security Scan](https://github.com/oxsecurity/ox-break-glass/actions/workflows/ox.yml/badge.svg)](https://github.com/oxsecurity/ox-break-glass/actions/workflows/ox.yml) -->
+[![OX Security Scan](https://github.com/oxsecurity/ox-break-glass/actions/workflows/ox.yml/badge.svg)](https://github.com/oxsecurity/ox-break-glass/actions/workflows/ox.yml)
 [![Deno Linter](https://github.com/oxsecurity/ox-break-glass/actions/workflows/deno.yml/badge.svg)](https://github.com/oxsecurity/ox-break-glass/actions/workflows/deno.yml)
 
 # ox-break-glass
