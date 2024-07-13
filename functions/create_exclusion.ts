@@ -195,6 +195,7 @@ async function getDedupedIssues(
     return queryError;
   }
   // Return the full issue data NOTE: do NOT JSON.stringify otherwise it'll overescape things
+  //console.log("return queryResult from getDedupedIssues: ", JSON.stringify(queryResult));
   return queryResult;
 }
 
@@ -402,6 +403,7 @@ export default SlackFunction(
         parsedStringArray.push(await JSON.parse(resultString)); //.parse undoes overescaping caused by .stringify
       }
     }
+    //console.log(parsedStringArray.toString());
     return { outputs: { output: parsedStringArray.toString() } };
   },
 );
