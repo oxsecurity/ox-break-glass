@@ -112,7 +112,7 @@ async function getIssues(jobNumber: string, authKey: string): Promise<string> {
   const queryPayload = {
     query,
     variables: {
-      "getCicdIssuesInput": { "filters": { "jobNumber": [jobNumber] } },
+      "getCicdIssuesInput": { "offset":0, "limit":100, "filters": { "jobNumber": [jobNumber] } },
     },
   };
   const queryResponse = await fetch(apiUrl, {
@@ -138,6 +138,7 @@ async function getIssues(jobNumber: string, authKey: string): Promise<string> {
     return queryError;
   }
   // Return the full issue data NOTE: do NOT JSON.stringify otherwise it'll overescape things
+//  console.log("getIssues queryResult: ", queryResult);
   return queryResult;
 }
 
@@ -167,6 +168,8 @@ async function getDedupedIssues(
     query,
     variables: {
       "getCicdIssuesInput": {
+        "offset":0, 
+        "limit":100,
         "filters": { "jobNumber": [jobNumber] },
         "scanID": scanID,
       },
@@ -195,7 +198,7 @@ async function getDedupedIssues(
     return queryError;
   }
   // Return the full issue data NOTE: do NOT JSON.stringify otherwise it'll overescape things
-  //console.log("return queryResult from getDedupedIssues: ", JSON.stringify(queryResult));
+ // console.log("return queryResult from getDedupedIssues: ", JSON.stringify(queryResult));
   return queryResult;
 }
 
