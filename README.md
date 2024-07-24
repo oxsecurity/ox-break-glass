@@ -5,8 +5,8 @@
 
 ## Precautions
 
-This is sample code for a one-off tool, not an official product. As such, it 
-is not supported, though issues will be addressed on a best-effort basis.
+This is sample code for a one-off tool, not an official product. As such, it is
+not supported, though issues will be addressed on a best-effort basis.
 
 ## Background and design
 
@@ -59,7 +59,6 @@ Third option (GitLab App):<br>
 <img width="325" alt="image" src="https://github.com/aaronhmiller/ox-break-glass/assets/223486/a4eb1dcd-7aaf-4f9c-9dbf-95b0c6acfd5e"><br>
 Fourth option (BitBucket App):<br>
 <img width="200" alt="image" src="https://github.com/aaronhmiller/ox-break-glass/assets/223486/a410b861-1e4f-4936-8235-04ba5071cb4c">
-
 
 4. check the output, which if successful will look something like this:
    ```
