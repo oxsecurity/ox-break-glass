@@ -24,7 +24,7 @@ export const CreateExclusionFunction = DefineFunction({
 // Define a function to handle the parsed JSON result
 function parseResult(result: undefined, submitter: string) {
   const data = result.data.getCICDIssue;
-  interface Input {
+  type Input = {
     oxIssueId: string;
     issueId: string;
     issueName: string;
@@ -38,20 +38,20 @@ function parseResult(result: undefined, submitter: string) {
     exclusionMode: string;
     expiredAt: Date;
     rule: Rule;
-  }
+  };
 
-  interface Exclusion {
+  type Exclusion = {
     _id: string;
     fileName: string;
     realMatch: string;
     aggId: string;
-  }
+  };
 
-  interface Rule {
+  type Rule = {
     exclusions: string[];
     exclusionCategory: string;
     id: string;
-  }
+  };
   const input: Input = {};
   const rule: Rule = {};
   const threeHourExpiration = new Date();

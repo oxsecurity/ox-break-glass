@@ -24,7 +24,7 @@ export const CreateExclusionFunction = DefineFunction({
 // Define a function to handle the parsed JSON result
 function parseResult(result: undefined, submitter: string) {
   const data = result.data.getCICDIssue;
-  interface Input {
+  type Input = {
     oxIssueId: string;
     issueId: string;
     issueName: string;
@@ -38,20 +38,20 @@ function parseResult(result: undefined, submitter: string) {
     exclusionMode: string;
     expiredAt: Date;
     rule: Rule;
-  }
+  };
 
-  interface Exclusion {
+  type Exclusion = {
     _id: string;
     fileName: string;
     realMatch: string;
     aggId: string;
-  }
+  };
 
-  interface Rule {
+  type Rule = {
     exclusions: string[];
     exclusionCategory: string;
     id: string;
-  }
+  };
   const input: Input = {};
   const rule: Rule = {};
   const threeHourExpiration = new Date();
@@ -112,7 +112,11 @@ async function getIssues(jobNumber: string, authKey: string): Promise<string> {
   const queryPayload = {
     query,
     variables: {
-      "getCicdIssuesInput": { "filters": { "jobNumber": [jobNumber] } },
+      "getCicdIssuesInput": {
+        "offset": 0,
+        "limit": 100,
+        "filters": { "jobNumber": [jobNumber] },
+      },
     },
   };
   const queryResponse = await fetch(apiUrl, {
@@ -138,6 +142,7 @@ async function getIssues(jobNumber: string, authKey: string): Promise<string> {
     return queryError;
   }
   // Return the full issue data NOTE: do NOT JSON.stringify otherwise it'll overescape things
+  //  console.log("getIssues queryResult: ", queryResult);
   return queryResult;
 }
 
@@ -167,6 +172,8 @@ async function getDedupedIssues(
     query,
     variables: {
       "getCicdIssuesInput": {
+        "offset": 0,
+        "limit": 100,
         "filters": { "jobNumber": [jobNumber] },
         "scanID": scanID,
       },
@@ -195,6 +202,7 @@ async function getDedupedIssues(
     return queryError;
   }
   // Return the full issue data NOTE: do NOT JSON.stringify otherwise it'll overescape things
+  // console.log("return queryResult from getDedupedIssues: ", JSON.stringify(queryResult));
   return queryResult;
 }
 
@@ -402,6 +410,7 @@ export default SlackFunction(
         parsedStringArray.push(await JSON.parse(resultString)); //.parse undoes overescaping caused by .stringify
       }
     }
+    //console.log(parsedStringArray.toString());
     return { outputs: { output: parsedStringArray.toString() } };
   },
 );
